@@ -1,0 +1,18 @@
+{
+  "name": "lernia-wordle",
+  "version": "1.0.0",
+  "description": "Assignment on describing algorithms and tests for them",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "author": "a-jaxell",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.5.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
