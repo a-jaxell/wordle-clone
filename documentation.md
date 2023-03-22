@@ -41,6 +41,9 @@ Algoritm
   
     2.1.3 om bokstäverna matchar, skicka ett object till result array med "correct"
 
+
+
+
   genom att iterera genom arr1. Skapa ett objekt med data för varje matchförsök.
   
   pusha varje försök till en array. som sen returneras i slutet av funktionen.

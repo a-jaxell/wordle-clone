@@ -18,22 +18,25 @@ export default class Ordel {
     }
   }
   match() {
-    // Create an empty array to iterate and fill with data
+    // Create an empty array
     const result = [];
+    const unmatched = this.correctWord.filter(
+      (e, i) => e != this.guessedWord[i]
+    );
 
     for (let i = 0; i < this.correctWord.length; i++) {
       let guess = this.guessedWord[i];
       let correct = this.correctWord[i];
 
-      if (this.correctWord.indexOf(guess) === -1) {
+      if (guess === correct) {
+        result.push({ letter: guess, result: "correct" });
+      } else if (unmatched.includes(guess)) {
+        result.push({ letter: guess, result: "mismatched" });
+      } else {
         result.push({ letter: guess, result: "incorrect" });
-    //   } else if (guess === correct) {
-    //     result.push({ letter: guess, result: "correct" });
-    //   } else {
-    //     result.push({ letter: guess, result: "mismatched" });
-    //   }
       }
-      return result;
     }
- }
+    console.log(result);
+    return result;
+  }
 }
