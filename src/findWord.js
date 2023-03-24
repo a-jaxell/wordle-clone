@@ -1,6 +1,7 @@
 // input, en lista med ord samt en siffra som anger önskad längd, samt en indikation på om unika bokstäver är tilllåtna eller ej
 export function findWord(wordList, wordLength = 5, multiChars) {
 
+    // Filters submitted array for words of the desired length and if multiple characters are allowed or not.
   const word = multiChars === true
     ? randomizeWord(wordList.filter((e) => e.length === wordLength))
     : randomizeWord(
@@ -11,11 +12,12 @@ export function findWord(wordList, wordLength = 5, multiChars) {
     return word ? word : `There isnt a matching word for ${wordLength} characters`; 
     }
  
-    // returns the value of an randomized index in an array
+// returns the value of an randomized index in an array
 export const randomizeWord = (array) => {
   return array[Math.floor(Math.random() * array.length)];
 };
 
+// Checks wether a word has multiple characters
 export const hasMultipleChars = (word) => {
   const result = [];
 
@@ -27,6 +29,3 @@ export const hasMultipleChars = (word) => {
   // Returns true in case any letter is included more than once in result
   return result.includes(true);
 };
-// Hantera på något väldefinierat sätt när inget passande ord finns
-
-// output, det slumpmässigt valda ordet
