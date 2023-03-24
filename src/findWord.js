@@ -1,15 +1,17 @@
 // input, en lista med ord samt en siffra som anger önskad längd, samt en indikation på om unika bokstäver är tilllåtna eller ej
 export function findWord(wordList, wordLength = 5, multiChars) {
-    
-  return multiChars === true
+
+  const word = multiChars === true
     ? randomizeWord(wordList.filter((e) => e.length === wordLength))
     : randomizeWord(
         wordList
           .filter((e) => !hasMultipleChars(e))
           .filter((e) => e.length === wordLength)
       );
+    return word ? word : `There isnt a matching word for ${wordLength} characters`; 
     }
  
+    // returns the value of an randomized index in an array
 export const randomizeWord = (array) => {
   return array[Math.floor(Math.random() * array.length)];
 };
