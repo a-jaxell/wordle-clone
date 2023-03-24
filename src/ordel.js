@@ -3,7 +3,7 @@ export default class Ordel {
     this.correctWord = [];
     this.guessedWord = [];
     this.formatCheck = (string) => {
-      const regex = /^[a-zA-Z]+$/;
+      const regex = /^[a-zåäöA-ZÅÄÖ]+$/;
       return regex.test(string);
     };
   }
@@ -16,61 +16,26 @@ export default class Ordel {
     } else {
       return "Submitted strings may only contain letters and can't be empty.";
     }
-    console.log(this.guessedWord.length);
   }
   match() {
-      // Create an empty array to iterate and fill with data
-      const result = new Array(this.correctWord.length).fill(null);
+    // Create an empty array
+    const result = [];
+    const unmatched = this.correctWord.filter(
+      (e, i) => e != this.guessedWord[i]
+    );
 
-      for(let i = 0; i <= result.length; i++) {
-        let currentLetter = this.guessedWord[i];
-        if (!result[i]) {
-          this.correctWord.indexOf(currentLetter) === -1
-            ? { letter: currentLetter, result: "incorrect" }
-            : () => {
-                // Creates an array of indices of currentLetter matches in correctWord and guessWord
-                const correctIndices = this.correctWord.reduce((a, c, i) => {
-                  if (c === currentLetter) {
-                    a.push(i);
-                  }
-                  return a;
-                }, []);
-                const guessIndices = this.guessWord.reduce((a, c, i) => {
-                  if (c === currentLetter) {
-                    a.push(i);
-                  }
-                  return a;
-                }, []);
+    for (let i = 0; i < this.correctWord.length; i++) {
+      let guess = this.guessedWord[i];
+      let correct = this.correctWord[i];
 
-                // Matches indices against each other, since words are the same length. A match is a match in letters
-                guessIndices.forEach((e, i) => {
-                  if (correctIndices.includes(guessIndices[e])) {
-                    return result[e] = {
-                      letter: this.guessedWord[e],
-                      result: "correct",
-                    };
-
-                    // If the amount of guessed letters are more than the amount contained in word. extra letters are incorrect.
-                  } else if (guessIndices[i] + 1 > correctIndices.length) {
-                    return result[e] = {
-                      letter: this.guessedWord[e],
-                      result: "incorrect",
-                    };
-                  } else {
-                    return result[e] = {
-                      letter: this.guessedWord[e],
-                      result: "misplaced",
-                    };
-                  }
-                });
-              };
-
-          // If letters in both strings match
-        } else {
-          //if(this.correctWord[index] === this.guessedWord[index]){
-          return { letter: currentLetter, result: "correct" };
-        }
-      };
-      return result;
+      if (guess === correct) {
+        result.push({ letter: guess, result: "correct" });
+      } else if (unmatched.includes(guess)) {
+        result.push({ letter: guess, result: "mismatched" });
+      } else {
+        result.push({ letter: guess, result: "incorrect" });
+      }
+    }
+    return result;
   }
 }

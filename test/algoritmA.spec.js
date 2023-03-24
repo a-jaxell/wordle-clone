@@ -1,5 +1,5 @@
 import { describe, expect } from "@jest/globals";
-import Ordel from "../src/Maybe";
+import Ordel from "../src/ordel";
 
 describe("Class Ordel", () => {
   test("input method adds parameters to two seperate arrays, turns them to lower case and splits them", () => {
