@@ -1,22 +1,31 @@
 import { findWord, hasMultipleChars, randomizeWord } from '../src/findWord.js';
 import { describe, expect } from "@jest/globals";
 
-const randNum = () =>  Math.floor(Math.random()*6);
-
 const mockArray = ['apple', 'banana', 'cherry', 'orange', 'grape', 'lemon', 'lime', 'kiwi', 'peach', 'pear'];
+
 /**
  * Test Strategy:
  * 
- * In order to cover a
+ * The purpose of these tests is to cover as many outcomes as possible.
+ * The idea is to make unit tests for many parts of the coming project that combined
+ * with more tests of other units serve as an integration test. 
+ * 
+ * I have tried to isolate parts of the functionality from findWord(), mainly since i
+ * applied a TDD approach working with one part at a time. 
+ * 
+ * These tests are meant to be used later in CI as checks to prevent regression.
+ * 
  */
 describe("Class findWord", () =>{
 
-    test("Handles no matching words", () => {
+    test("Handles the event of no words matching ", () => {
         expect(findWord(mockArray, 10, true)).toBe(
-            "There isnt a matching word for 10 characters"
+            "There isnt a matching word for 10 letters while allowing multiple characters"
+        )
+        expect(findWord(mockArray, 2, false)).toBe(
+            "There isnt a matching word for 2 letters while not allowing multiple characters"
         )
     })
-
     test("Randomizes a word, returns a string greater than 0", () => {
         expect(typeof randomizeWord(mockArray)).toBe("string");
         expect(randomizeWord(mockArray).length).toBeGreaterThan(0);
@@ -38,13 +47,4 @@ describe("Class findWord", () =>{
             true
         )
     });
-    // test('Accept the correct format, else return error message.', () => {
-    //     expect(findWord(mockArray, 5, M)).toBe(
-    //         {word: returnedWord, length: 5, multiChars: true}
-    //     )
-    //     expect(findWord('Mustard', a, true)).toBe(
-    //         "Incorrect Input in findWord."
-    //     )
-    // });
-
 });

@@ -9,7 +9,9 @@ export function findWord(wordList, wordLength = 5, multiChars) {
           .filter((e) => !hasMultipleChars(e))
           .filter((e) => e.length === wordLength)
       );
-    return word ? word : `There isnt a matching word for ${wordLength} characters`; 
+    // Handles event of not any words matching
+    const multiBoolean = multiChars ? '' : 'not ';  
+    return word ? word : `There isnt a matching word for ${wordLength} letters while ${multiBoolean}allowing multiple characters`; 
     }
  
 // returns the value of an randomized index in an array
