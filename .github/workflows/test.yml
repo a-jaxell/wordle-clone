@@ -1,0 +1,38 @@
+name: Continuous Integration
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
+  prettier:
+    runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+          with:
+            # Branch that gets checked out
+            ref: ${{ github.head_ref }}
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.2
+        with:
+          #Here you can pass other options
+          # These parameters prettifies all files with the js and md extension
+          prettier_options: --write **/*.{js,md}
+
